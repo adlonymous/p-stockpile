@@ -1,0 +1,11 @@
+[package]
+name = "p-stockpile"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pinocchio = "0.8.4"
+pinocchio-system = "0.2.3"
