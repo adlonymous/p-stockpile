@@ -1,21 +1,5 @@
 # P-Stockpile (Stockpile v3)
 
-█████╗█████╗█████╗
-╚════╝╚════╝╚════╝
-
-
-
-███████╗████████╗ ██████╗  ██████╗██╗  ██╗██████╗ ██╗██╗     ███████╗
-██╔════╝╚══██╔══╝██╔═══██╗██╔════╝██║ ██╔╝██╔══██╗██║██║     ██╔════╝
-███████╗   ██║   ██║   ██║██║     █████╔╝ ██████╔╝██║██║     █████╗
-╚════██║   ██║   ██║   ██║██║     ██╔═██╗ ██╔═══╝ ██║██║     ██╔══╝
-███████║   ██║   ╚██████╔╝╚██████╗██║  ██╗██║     ██║███████╗███████╗
-╚══════╝   ╚═╝    ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝
-
-
-
-█████╗█████╗█████╗
-╚════╝╚════╝╚════╝
 
 ## Overview
 
@@ -42,3 +26,27 @@ Rust using the Pinocchio library.
 
 Just started working on this, you can follow along with the progress through this codebase or through
 my [Twitter](https://twitter.com/adlonymous).
+
+### To Do
+
+[ ] Create Project
+[ ] Create Pool
+[ ] Create Source
+[ ] Create Milestone
+[ ] Contribute
+[ ] Contribute with vote
+[ ] Deactivate Project
+[ ] Add Project
+[ ] Join Pool
+[ ] Fund Pool
+[ ] Withdraw
+[ ] Withdraw All
+[ ] Close Project
+[ ] Close Milestone
+[ ] Claim Payout
+[ ] Withdraw Funds from Round
+[ ] Update Project
+[ ] Update Pool
+[ ] Extend Pool Duration
+[ ] Extend Pool Start
+[ ] Realloc Pool
