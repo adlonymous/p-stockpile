@@ -1,11 +1,11 @@
 #![no_std]
+#![allow(unexpected_cfgs)]
 extern crate alloc;
 
-mod state;
-mod instructions;
-mod utils;
-
-use crate::instructions::*;
+pub mod state;
+pub mod instructions;
+pub use instructions::*;
+pub mod utils;
 
 use pinocchio::{account_info::AccountInfo, pubkey::Pubkey, entrypoint, nostd_panic_handler, ProgramResult, program_error::ProgramError};
 use pinocchio_pubkey;

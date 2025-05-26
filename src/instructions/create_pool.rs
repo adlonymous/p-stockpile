@@ -12,12 +12,12 @@ use crate::{
 };
 
 #[derive(Debug)]
-pub struct CreatePoolArgs<'a> {
+pub struct CreatePool<'a> {
     pub accounts: PoolAccounts<'a>,
     pub pool: &'a Pool<'a>,
 }
 
-impl<'a> TryFrom<(&'a [u8], &'a [AccountInfo])> for CreatePoolArgs<'a> {
+impl<'a> TryFrom<(&'a [u8], &'a [AccountInfo])> for CreatePool<'a> {
     type Error = ProgramError;
 
     fn try_from((data, accounts): (&'a [u8], &'a [AccountInfo])) -> Result<Self, Self::Error> {
@@ -28,7 +28,8 @@ impl<'a> TryFrom<(&'a [u8], &'a [AccountInfo])> for CreatePoolArgs<'a> {
     }
 }
 
-impl<'a> CreatePoolArgs<'a> {
+impl<'a> CreatePool<'a> {
+    pub const DISCRIMINATOR: &'a u8 = &0;
     pub fn process(&self) -> ProgramResult {
 
         let signer_seeds = seeds!(

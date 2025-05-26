@@ -49,31 +49,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "jaguar"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "96ead9ac478abc925aa34afdc75a1443e640d8f7f4c523d857674885964d501c"
-dependencies = [
- "jaguar-derive",
-]
-
-[[package]]
-name = "jaguar-derive"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f6d3f37cf4cc27e1253cdcada9106dfd298daebfab4a9672fe9c41dc8c08f9f"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 1.0.109",
-]
-
-[[package]]
 name = "p-stockpile"
 version = "0.1.0"
 dependencies = [
  "heapless",
- "jaguar",
  "pinocchio",
  "pinocchio-pubkey",
  "pinocchio-system",
