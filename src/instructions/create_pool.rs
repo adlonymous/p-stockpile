@@ -1,56 +1,53 @@
-use alloc::vec;
 use pinocchio::{
     account_info::{AccountInfo},
     ProgramResult,
-    pubkey::Pubkey,
     program_error::ProgramError,
     sysvars::{rent::Rent,},
     seeds,
     instruction::{Signer}
 };
 use pinocchio_system::instructions::{CreateAccount};
-use jaguar::{JaguarSerialize, JaguarDeserialize, JaguarSerializer, JaguarDeserializer};
-
 use crate::{
-    state::Pool,
-    utils::validation::validate_is_signer,
+    state::{Pool, PoolAccounts},
 };
 
-#[derive(Debug, JaguarSerialize, JaguarDeserialize)]
+#[derive(Debug)]
 pub struct CreatePoolArgs<'a> {
-    pub pool: &'a Pool,
+    pub accounts: PoolAccounts<'a>,
+    pub pool: &'a Pool<'a>,
 }
 
-pub fn create_pool(
-    program_id: &Pubkey,
-    accounts: &[AccountInfo],
-    args: CreatePoolArgs
-) -> ProgramResult {
+impl<'a> TryFrom<(&'a [u8], &'a [AccountInfo])> for CreatePoolArgs<'a> {
+    type Error = ProgramError;
 
-    let [pool_account, payer, system_program, _] = accounts else {
-        return Err(ProgramError::NotEnoughAccountKeys)
-    };
-    validate_is_signer(payer)?;
+    fn try_from((data, accounts): (&'a [u8], &'a [AccountInfo])) -> Result<Self, Self::Error> {
+        let accounts = PoolAccounts::try_from(accounts)?;
+        let pool: &Pool = &Pool::try_from(data)?;
 
-    let rent = Rent::from_account_info(pool_account)?;
-    let rent_minimum = rent.minimum_balance(size_of::<Pool>());
-
-    let signer_seeds = seeds!(
-        Pool::SEED_PREFIX.as_bytes(),
-        payer.key().as_ref(),
-        &[args.pool.bump]
-    );
-
-    let signer = Signer::from(&signer_seeds);
-
-    CreateAccount {
-        from: payer,
-        to: pool_account,
-        lamports: rent_minimum,
-        space: size_of::<Pool>() as u64,
-        owner: program_id,
+        Ok(Self { accounts, pool })
     }
-        .invoke_signed(&[signer])?;
+}
 
-    Ok(())
+impl<'a> CreatePoolArgs<'a> {
+    pub fn process(&self) -> ProgramResult {
+
+        let signer_seeds = seeds!(
+            Pool::SEED_PREFIX.as_bytes(),
+            self.accounts.payer.key().as_ref(),
+            &[self.pool.bump]
+        );
+
+        let signer = Signer::from(&signer_seeds);
+
+        CreateAccount {
+            from: self.accounts.payer,
+            to: self.accounts.pool_account,
+            lamports: Rent::from_account_info(self.accounts.pool_account)?.minimum_balance(size_of::<Pool>()),
+            space: size_of::<Pool>() as u64,
+            owner: &self.pool.admin,
+        }
+            .invoke_signed(&[signer])?;
+
+        Ok(())
+    }
 }
