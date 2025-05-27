@@ -22,6 +22,13 @@ Rust using the Pinocchio library.
 
     `cargo build-bpf`
 
+## Navigating the Codebase
+
+To understand the codebase, check out documentation on: 
+
+- [Solana](https://solana.com/docs)
+- [Pinocchio](https://docs.rs/pinocchio)
+
 
 ## Progress
 
@@ -30,8 +37,8 @@ my [Twitter](https://twitter.com/adlonymous).
 
 ### To Do
 
-- [ ] Create Pool
-- [ ] Create Vault
+- [x] Create Pool
+- [x] Create Vault
 - [ ] Join Pool
 - [ ] Refresh
 - [ ] Contribute with vote
